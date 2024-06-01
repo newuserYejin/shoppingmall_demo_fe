@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,20 +12,23 @@ const Login = () => {
   const { user } = useSelector((state) => state.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const error = useSelector((state) => state.user.error);
+  const error = useSelector((state) => state.user.error || "");
 
   const loginWithEmail = (event) => {
     event.preventDefault();
-    //이메일,패스워드를 가지고 백엔드로 보내기
+    dispatch(userActions.loginWithEmail({ email, password }))
   };
 
   const handleGoogleLogin = async (googleData) => {
     // 구글로 로그인 하기
   };
 
-  if (user) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
+
   return (
     <>
       <Container className="login-area">

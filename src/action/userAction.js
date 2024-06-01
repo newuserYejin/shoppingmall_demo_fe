@@ -4,9 +4,39 @@ import { commonUiActions } from "./commonUiAction";
 import * as commonTypes from "../constants/commonUI.constants";
 import { type } from "@testing-library/user-event/dist/type";
 
-const loginWithToken = () => async (dispatch) => { };
-const loginWithEmail = (payload) => async (dispatch) => { };
-const logout = () => async (dispatch) => { };
+const loginWithToken = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.LOGIN_WITH_TOKEN_REQUEST })
+    const response = await api.get('/user/me')
+    if (response.status !== 200) throw new Error(response.error)
+    console.log("rrrr", response)
+    dispatch({ type: types.LOGIN_WITH_TOKEN_SUCCESS, payload: response.data })
+
+  } catch (error) {
+    dispatch({ type: types.LOGIN_WITH_TOKEN_FAIL })
+    dispatch(logout())
+  }
+};
+
+const loginWithEmail = ({ email, password }) => async (dispatch) => {
+  try {
+    dispatch({ type: types.LOGIN_REQUEST })
+    const response = await api.post('/auth/login', { email, password })
+    if (response.status !== 200) {
+      throw new Error("invalid Email or Password")
+    }
+
+    console.log("response.data: ", response.data)
+    sessionStorage.setItem("token", response.data.token)
+    await dispatch({ type: types.LOGIN_SUCCESS, payload: response.data })
+  } catch (error) {
+    await dispatch({ type: types.LOGIN_FAIL, payload: error.error })
+  }
+};
+const logout = () => async (dispatch) => {
+  dispatch({ type: types.LOGOUT })
+  sessionStorage.removeItem('token')
+};
 
 const loginWithGoogle = (token) => async (dispatch) => { };
 
