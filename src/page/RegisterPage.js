@@ -7,6 +7,8 @@ import "../style/register.style.css";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
+  const [errorResult, setErrorResult] = useState(false)
+
 
   const [formData, setFormData] = useState({
     email: "",
@@ -37,9 +39,23 @@ const RegisterPage = () => {
     // FormData에 있는 값을 가지고 백엔드로 넘겨주기
     setPasswordError("")
     setPolicyError(false)
-    dispatch(userActions.registerUser({ email, name, password }, navigate))
+    dispatch(userActions.registerUser({ email, name, password }, navigate, setErrorResult))
     //성공후 로그인 페이지로 넘어가기
   };
+
+  useEffect(() => {
+    if (errorResult === true) {
+      console.log("값비우기")
+
+      setFormData({
+        ...formData,
+        name: "", // 혹은 다른 필드를 비우려면 해당 필드를 비워주세요
+        password: "",
+        confirmPassword: ""
+      });
+      setErrorResult(false)
+    }
+  }, [errorResult])
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -80,6 +96,7 @@ const RegisterPage = () => {
             type="text"
             id="name"
             placeholder="Enter name"
+            value={formData.name}
             onChange={handleChange}
             required
           />
@@ -90,6 +107,7 @@ const RegisterPage = () => {
             type="password"
             id="password"
             placeholder="Password"
+            value={formData.password}
             onChange={handleChange}
             required
           />
@@ -101,6 +119,7 @@ const RegisterPage = () => {
             id="confirmPassword"
             placeholder="Confirm Password"
             onChange={handleChange}
+            value={formData.confirmPassword}
             required
             isInvalid={passwordError}
           />
