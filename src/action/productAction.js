@@ -28,6 +28,7 @@ const createProduct = (formData) => async (dispatch) => {
 
     dispatch({ type: types.PRODUCT_CREATE_SUCCESS })
     dispatch(commonUiActions.showToastMessage("상품 추가 완료", "success"))
+    dispatch(getProductList());
 
   } catch (error) {
     dispatch({ type: types.PRODUCT_CREATE_FAIL, payload: error.error })
