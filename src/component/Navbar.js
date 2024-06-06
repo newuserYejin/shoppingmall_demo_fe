@@ -8,9 +8,10 @@ import {
   faShoppingBag,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../action/userAction";
+import { productActions } from "../action/productAction";
 
 const Navbar = ({ user }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Navbar = ({ user }) => {
   ];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
+
   const onCheckEnter = (event) => {
     if (event.key === "Enter") {
       if (event.target.value === "") {
@@ -37,9 +39,11 @@ const Navbar = ({ user }) => {
       navigate(`?name=${event.target.value}`);
     }
   };
+
   const logout = () => {
     dispatch(userActions.logout());
   };
+
   return (
     <div>
       {showSearchBox && (
@@ -101,9 +105,8 @@ const Navbar = ({ user }) => {
             <div onClick={() => navigate("/cart")} className="nav-icon">
               <FontAwesomeIcon icon={faShoppingBag} />
               {!isMobile && (
-                <span style={{ cursor: "pointer" }}>{`쇼핑백(${
-                  cartItemCount || 0
-                })`}</span>
+                <span style={{ cursor: "pointer" }}>{`쇼핑백(${cartItemCount || 0
+                  })`}</span>
               )}
             </div>
             <div

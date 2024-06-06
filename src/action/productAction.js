@@ -7,10 +7,13 @@ import { type } from "@testing-library/user-event/dist/type";
 const getProductList = (query) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_PRODUCT_DETAIL_REQUEST })
-    const response = await api.get("/product")
+    const response = await api.get("/product", {
+      params: { ...query }
+    })
+    console.log("response data", response)
     if (response.status !== 200) throw new Error(response.error)
-    dispatch({ type: types.GET_PRODUCT_DETAIL_SUCCESS, payload: response.data.data })
-    console.log("product data", response.data.data)
+    dispatch({ type: types.GET_PRODUCT_DETAIL_SUCCESS, payload: response.data })
+    // console.log("product data", response.data.data)
   } catch (error) {
     dispatch({ type: types.GET_PRODUCT_DETAIL_FAIL, payload: error.error })
   }
