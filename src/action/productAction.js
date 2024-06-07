@@ -18,7 +18,17 @@ const getProductList = (query) => async (dispatch) => {
     dispatch({ type: types.PRODUCT_GET_FAIL, payload: error.error })
   }
 };
-const getProductDetail = (id) => async (dispatch) => { };
+const getProductDetail = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_PRODUCT_DETAIL_REQUEST })
+    const response = await api.get(`/product/${id}`)
+    console.log("response detail data", response)
+    if (response.status !== 200) throw new Error(response.error)
+    dispatch({ type: types.GET_PRODUCT_DETAIL_SUCCESS, payload: response.data })
+  } catch (error) {
+    dispatch({ type: types.GET_PRODUCT_DETAIL_FAIL, payload: error.error })
+  }
+};
 
 const createProduct = (formData) => async (dispatch) => {
   try {
