@@ -20,16 +20,19 @@ const ProductAll = () => {
   useEffect(() => {
     dispatch(productActions.getProductList({ name: searchQuery }))
     console.log("query:", searchQuery.name)
+    console.log("search result:", productList)
   }, [searchQuery])
 
   return (
     <Container>
       <Row>
-        {productList.map((item, index) => (
+        {productList && productList.length > 0 ? (productList.map((item, index) => (
           <Col md={3} sm={12}>
             <ProductCard item={item} />
-          </Col>
-        ))}
+          </Col>)
+        )) : (<Col md={3} sm={12}>
+          <div>검색결과가 없습니다</div>
+        </Col>)}
       </Row>
     </Container>
   );
