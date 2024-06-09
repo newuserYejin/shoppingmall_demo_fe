@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
@@ -27,7 +27,7 @@ const OrderReceipt = ({ cartList, totalPrice }) => {
           <strong>Total:</strong>
         </div>
         <div>
-          <strong>₩ {totalPrice}</strong>
+          <strong>₩ {currencyFormat(totalPrice)}</strong>
         </div>
       </div>
       {location.pathname.includes("/cart") && (

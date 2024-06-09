@@ -44,8 +44,29 @@ const deleteCartItem = (id) => async (dispatch) => {
   }
 };
 
-const updateQty = (id, value) => async (dispatch) => { };
-const getCartQty = () => async (dispatch) => { };
+const updateQty = (id, value) => async (dispatch) => {
+  try {
+    dispatch({ type: types.UPDATE_CART_ITEM_REQUEST })
+    const response = api.put(`/cart/${id}`, { qty: value })
+    if (response.status !== 200) throw new Error(response.error)
+    dispatch({ type: types.UPDATE_CART_ITEM_SUCCESS, payload: response.data.data })
+    dispatch(getCartList())
+  } catch (error) {
+    dispatch({ type: types.UPDATE_CART_ITEM_FAIL, payload: error.error })
+  }
+};
+
+const getCartQty = () => async (dispatch) => {
+  try {
+    dispatch({ type: types.GET_CART_QTY_REQUEST })
+    const response = api.get('/cart/qty')
+    if (response.status !== 200) throw new Error(response.error)
+    console.log("qty data:", response)
+    dispatch({ type: types.GET_CART_QTY_SUCCESS, payload: response.data.qty })
+  } catch (error) {
+    dispatch({ type: types.GET_CART_QTY_FAIL, payload: error.error })
+  }
+};
 export const cartActions = {
   addToCart,
   getCartList,
