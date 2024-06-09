@@ -21,6 +21,8 @@ const AdminProduct = () => {
     name: query.get("name") || "",
   }); //검색 조건들을 저장하는 객체
 
+  const { selectedProduct } = useSelector(state => state.product)
+
   const [mode, setMode] = useState("new");
   const tableHeader = [
     "#",
@@ -62,6 +64,11 @@ const AdminProduct = () => {
     setShowDialog(true)
   };
 
+  // selectedProduct가 업데이트될 때마다 콘솔에 출력
+  useEffect(() => {
+    console.log("selectedProduct", selectedProduct);
+  }, [selectedProduct]);
+
   const handleClickNewItem = () => {
     //new 모드로 설정하고
     setMode("new")
@@ -102,6 +109,7 @@ const AdminProduct = () => {
           deleteItem={deleteItem}
           openEditForm={openEditForm}
         />
+
         <ReactPaginate
           nextLabel="next >"
           onPageChange={handlePageClick}

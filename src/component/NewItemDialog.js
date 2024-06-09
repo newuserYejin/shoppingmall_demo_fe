@@ -18,8 +18,9 @@ const InitialFormData = {
   status: "active",
   price: 0,
 };
+
 const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
-  const selectedProduct = useSelector((state) => state.product.selectedProduct);
+  const { selectedProduct } = useSelector((state) => state.product);
   const { error } = useSelector((state) => state.product);
   const [formData, setFormData] = useState(
     mode === "new" ? { ...InitialFormData } : selectedProduct
@@ -27,8 +28,6 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
   const [stock, setStock] = useState([]);
   const dispatch = useDispatch();
   const [stockError, setStockError] = useState(false);
-
-  console.log("stock: ", stock)
 
   const handleClose = () => {
     //모든걸 초기화시키고;
@@ -129,6 +128,8 @@ const NewItemDialog = ({ mode, showDialog, setShowDialog }) => {
     if (showDialog) {
       if (mode === "edit") {
         // 선택된 데이터값 불러오기 (재고 형태 객체에서 어레이로 바꾸기)
+        console.log("mode: ", mode)
+        console.log("selectedProduct: ", selectedProduct)
         setFormData(selectedProduct)
         const stockArray = Object.keys(selectedProduct.stock).map((size) => [size, selectedProduct.stock[size]])
         setStock(stockArray)
