@@ -1,12 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import { currencyFormat } from "../utils/number";
+import { useSelector } from "react-redux";
 
 const OrderReceipt = ({ cartList, totalPrice }) => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const [totalProductCount, setTotalProductCount] = useState(0)
+
+  useEffect(() => {
+    // 각 item의 qty를 더하여 totalProductCount를 계산
+    const totalCount = cartList.reduce((sum, item) => sum + item.qty, 0);
+    setTotalProductCount(totalCount);
+  }, [cartList]);
 
   return (
     <div className="receipt-container">
@@ -23,6 +32,12 @@ const OrderReceipt = ({ cartList, totalPrice }) => {
         ))}
       </ul>
       <div className="display-flex space-between receipt-title">
+        <div>
+          <strong>Total Count:</strong>
+        </div>
+        <div>
+          <strong>{totalProductCount}</strong>
+        </div>
         <div>
           <strong>Total:</strong>
         </div>

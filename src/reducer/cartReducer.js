@@ -11,7 +11,6 @@ const initialState = {
   cartItemQty: 0,
   cartList: [],
   totalPrice: 0,
-  totalQty: 0,
 };
 
 function cartReducer(state = initialState, action) {
@@ -26,6 +25,7 @@ function cartReducer(state = initialState, action) {
 
     case types.ADD_TO_CART_SUCCESS:
     case types.DELETE_CART_ITEM_SUCCESS:
+    case types.GET_CART_QTY_SUCCESS:
       return { ...state, loading: false, cartItemQty: payload }
 
     case types.UPDATE_CART_ITEM_REQUEST:
@@ -35,9 +35,6 @@ function cartReducer(state = initialState, action) {
         cartList: payload,
         totalPrice: payload.reduce((total, item) => total += item.productId.price * item.qty, 0)
       }
-
-    case types.GET_CART_QTY_SUCCESS:
-      return { ...state, totalQty: payload }
 
     case types.GET_CART_LIST_SUCCESS:
       return {

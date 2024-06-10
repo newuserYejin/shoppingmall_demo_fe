@@ -13,6 +13,7 @@ const CartProductCard = ({ item }) => {
     //아이템 수량을 수정한다
     console.log("id:", id, "qty:", value)
     dispatch(cartActions.updateQty(id, value))
+    dispatch(cartActions.getCartList())
   };
 
   const deleteCart = (id) => {

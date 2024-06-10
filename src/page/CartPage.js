@@ -6,15 +6,25 @@ import { cartActions } from "../action/cartAction";
 import CartProductCard from "../component/CartProductCard";
 import OrderReceipt from "../component/OrderReceipt";
 import "../style/cart.style.css";
+import { useNavigate } from "react-router";
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const { cartList, totalPrice } = useSelector(state => state.cart)
+  const { user } = useSelector(state => state.user)
+  const navigate = useNavigate()
 
   useEffect(() => {
     // 카트리스트 불러오기
     dispatch(cartActions.getCartList())
-  }, []);
+    console.log("cart:", cartList)
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/login')
+    }
+  }, [user])
 
   return (
     <Container>

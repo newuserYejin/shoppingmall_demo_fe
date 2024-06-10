@@ -48,7 +48,7 @@ const Navbar = ({ user }) => {
 
   useEffect(() => {
     dispatch(cartActions.getCartQty())
-  }, [dispatch])
+  }, [])
 
   return (
     <div>
@@ -111,7 +111,7 @@ const Navbar = ({ user }) => {
             <div onClick={() => navigate("/cart")} className="nav-icon">
               <FontAwesomeIcon icon={faShoppingBag} />
               {!isMobile && (
-                <span style={{ cursor: "pointer" }}>{`쇼핑백(${cartItemQty || 0
+                <span style={{ cursor: "pointer" }}>{`쇼핑백(${user ? cartItemQty : 0
                   })`}</span>
               )}
             </div>
