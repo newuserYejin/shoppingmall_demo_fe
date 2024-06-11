@@ -1,2 +1,2 @@
-/api/* http://shoppingmall-demo.ap-southeast-2.elasticbeanstalk.com/api/:splat 200
+/api/* http://shopppingdemosite.ap-northeast-2.elasticbeanstalk.com/api/:splat 200
 /* /index.html 200
