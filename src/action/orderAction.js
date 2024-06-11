@@ -8,11 +8,11 @@ const createOrder = (payload) => async (dispatch) => {
     dispatch({ type: types.CREATE_ORDER_REQUEST })
     const response = await api.post("/order", payload)
     if (response.status !== 200) throw new Error(response.error)
-    // dispatch({ type: types.CREATE_ORDER_SUCCESS})
-    dispatch(commonUiActions.showToastMessage("정상처리 되었습니다."))
+    dispatch({ type: types.CREATE_ORDER_SUCCESS, payload: response.data.orderNum })
+    dispatch(commonUiActions.showToastMessage("주문완료", "success"))
   } catch (error) {
     dispatch({ type: types.CREATE_ORDER_FAIL, payload: error.error })
-    dispatch(commonUiActions.showToastMessage("오류가 발생했습니다."))
+    dispatch(commonUiActions.showToastMessage(error.error, "error"))
   }
 };
 

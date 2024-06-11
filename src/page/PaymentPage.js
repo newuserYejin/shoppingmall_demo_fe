@@ -21,6 +21,7 @@ const PaymentPage = () => {
     number: "",
   });
   const { cartList, totalPrice } = useSelector(state => state.cart)
+
   const navigate = useNavigate();
   const [firstLoading, setFirstLoading] = useState(true);
   const [shipInfo, setShipInfo] = useState({
@@ -38,6 +39,7 @@ const PaymentPage = () => {
     event.preventDefault();
     const { firstName, lastName, contact, address, city, zip } = shipInfo
     //오더 생성하기
+    console.log("cartList", cartList)
     const data = {
       totalPrice,
       shipTo: { address, city, zip, },
@@ -47,7 +49,7 @@ const PaymentPage = () => {
           productId: item.productId._id,
           price: item.productId.price,
           qty: item.qty,
-          size: item.size
+          size: item.selectSize
         }
       })
     }
