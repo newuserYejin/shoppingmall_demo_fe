@@ -34,15 +34,7 @@ const OrderStatusCard = ({ order }) => {
         </Col>
         <Col md={2} className="vertical-middle">
           <div className="text-align-center text-12">주문상태</div>
-          {
-            order.status === 'preparing' ? (
-              <Badge bg="primary">{order.status}</Badge>
-            ) : order.status === 'shipping' ? (
-              <Badge bg="warning">{order.status}</Badge>
-            ) : (
-              <Badge bg="danger">{order.status}</Badge>
-            )
-          }
+          <Badge bg={badgeBg[item.status]}>preparing</Badge>
         </Col>
       </Row>
     </div>
