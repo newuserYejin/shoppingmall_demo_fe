@@ -48,6 +48,7 @@ const AdminOrderPage = () => {
 
   const openEditForm = (order) => {
     setOpen(true);
+    console.log(order)
     dispatch({ type: types.SET_SELECTED_ORDER, payload: order });
   };
 
@@ -76,10 +77,11 @@ const AdminOrderPage = () => {
           data={orderList}
           openEditForm={openEditForm}
         />
+
         <ReactPaginate
           nextLabel="next >"
           onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={2}
           pageCount={totalPageNum}
           forcePage={searchQuery.page - 1}
           previousLabel="< previous"

@@ -18,6 +18,7 @@ const getProductList = (query) => async (dispatch) => {
     dispatch({ type: types.PRODUCT_GET_FAIL, payload: error.error })
   }
 };
+
 const getProductDetail = (id) => async (dispatch) => {
   try {
     dispatch({ type: types.GET_PRODUCT_DETAIL_REQUEST })
