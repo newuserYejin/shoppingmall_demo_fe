@@ -21,9 +21,13 @@ const MyPage = () => {
   // 오더리스트가 없다면? 주문한 상품이 없습니다 메세지 보여주기
   return (
     <Container className="status-card-container">
-      {orderList && orderList.map((order) => (
-        <OrderStatusCard key={order._id} order={order} />
-      ))
+      {orderList.length === 0 || !orderList ?
+        (<div className="text-align-center empty-bag">
+          <h2>주문한 상품이 없습니다.</h2>
+        </div>) :
+        (orderList && orderList.map((order) => (
+          <OrderStatusCard key={order._id} order={order} />
+        )))
       }
     </Container>
   );
