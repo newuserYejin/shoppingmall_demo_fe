@@ -48,7 +48,7 @@ const Navbar = ({ user }) => {
 
   useEffect(() => {
     dispatch(cartActions.getCartQty())
-  }, [])
+  }, [user])
 
   return (
     <div>
