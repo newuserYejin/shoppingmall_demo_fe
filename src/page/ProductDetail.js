@@ -38,11 +38,6 @@ const ProductDetail = () => {
     setSize(value)
   };
 
-
-  //카트에러가 있으면 에러메세지 보여주기
-
-  //에러가 있으면 에러메세지 보여주기
-
   useEffect(() => {
     //상품 디테일 정보 가져오기
     dispatch(productActions.getProductDetail(id))
@@ -79,20 +74,20 @@ const ProductDetail = () => {
               id="dropdown-basic"
               align="start"
             >
-              {size === "" ? "사이즈 선택" : size.toUpperCase()}
+              {size === "" ? "select size" : size.toUpperCase()}
             </Dropdown.Toggle>
 
             <Dropdown.Menu className="size-drop-down">
               {/* <Dropdown.Item>M</Dropdown.Item> */}
               {Object.entries(productDetail.stock).map(([size, quantity]) => (
                 <Dropdown.Item key={size} eventKey={size}>
-                  {`${size.toUpperCase()}: ${quantity}개 남음`}
+                  {`${size.toUpperCase()}: ${quantity}stock`}
                 </Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
           <div className="warning-message">
-            {sizeError && "사이즈를 선택해주세요."}
+            {sizeError && "plz select your size."}
           </div>
           <Button variant="dark" className="add-button" onClick={addItemToCart}>
             추가

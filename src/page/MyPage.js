@@ -5,18 +5,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { orderActions } from "../action/orderAction";
 import OrderStatusCard from "../component/OrderStatusCard";
 import "../style/orderStatus.style.css";
+import { useNavigate } from "react-router";
 
 const MyPage = () => {
   const dispatch = useDispatch();
   const { orderList } = useSelector(state => state.order)
-  // const myOrderList = dispatch()
+  const { user } = useSelector(state => state.user)
+  const navigate = useNavigate()
 
+  //오더리스트 들고오기
   useEffect(() => {
     dispatch(orderActions.getOrder())
     console.log("get orderList", orderList)
   }, [dispatch])
 
-  //오더리스트 들고오기
+  // 로그인 안한 상태면 login페이지로 이동
+  useEffect(() => {
+    if (!user) {
+      navigate('/login')
+    }
+  }, [user])
+
 
   // 오더리스트가 없다면? 주문한 상품이 없습니다 메세지 보여주기
   return (
