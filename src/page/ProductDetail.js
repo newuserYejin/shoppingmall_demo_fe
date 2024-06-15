@@ -26,12 +26,14 @@ const ProductDetail = () => {
       return
     }
     // 2. 아직 로그인을 안한유저라면 로그인페이지로
-    if (!user) navigate('/login')
-
+    if (!user) {
+      navigate('/login')
+      return dispatch(commonUiActions.showToastMessage("Login First", "error"))
+    }
     // 3. 카트에 아이템 추가하기
     dispatch(cartActions.addToCart({ id, size }))
-
   };
+
   const selectSize = (value) => {
     // 사이즈 추가하기
     if (sizeError) setSizeError(false)
@@ -80,7 +82,10 @@ const ProductDetail = () => {
             <Dropdown.Menu className="size-drop-down">
               {/* <Dropdown.Item>M</Dropdown.Item> */}
               {Object.entries(productDetail.stock).map(([size, quantity]) => (
-                <Dropdown.Item key={size} eventKey={size}>
+                <Dropdown.Item key={size} eventKey={size}
+                  style={quantity === 0 ? { textDecorationLine: "line-through" } : { textDecorationLine: "none" }}
+                  disabled={quantity === 0}
+                >
                   {`${size.toUpperCase()}: ${quantity}stock`}
                 </Dropdown.Item>
               ))}
@@ -94,7 +99,7 @@ const ProductDetail = () => {
           </Button>
         </Col>
       </Row>
-    </Container>
+    </Container >
   );
 };
 

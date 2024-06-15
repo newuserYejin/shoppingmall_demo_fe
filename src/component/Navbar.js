@@ -20,14 +20,9 @@ const Navbar = ({ user }) => {
   const isMobile = window.navigator.userAgent.indexOf("Mobile") !== -1;
   const [showSearchBox, setShowSearchBox] = useState(false);
   const menuList = [
-    "여성",
-    "Divided",
-    "남성",
-    "신생아/유아",
-    "아동",
-    "H&M HOME",
-    "Sale",
-    "지속가능성",
+    "Top",
+    "Dress",
+    "Pants",
   ];
   let [width, setWidth] = useState(0);
   let navigate = useNavigate();
@@ -44,6 +39,10 @@ const Navbar = ({ user }) => {
   const logout = () => {
     dispatch(userActions.logout());
     navigate('/')
+  };
+
+  const selectCategory = (category) => {
+    navigate(`?category=${category}`);
   };
 
 
@@ -80,7 +79,7 @@ const Navbar = ({ user }) => {
 
         <div className="side-menu-list" id="menu-list">
           {menuList.map((menu, index) => (
-            <button key={index}>{menu}</button>
+            <button key={index} onClick={() => selectCategory(menu)}>{menu}</button>
           ))}
         </div>
       </div>
@@ -140,7 +139,7 @@ const Navbar = ({ user }) => {
       <div className="nav-menu-area">
         <ul className="menu">
           {menuList.map((menu, index) => (
-            <li key={index}>
+            <li key={index} onClick={() => selectCategory(menu)}>
               <a href="#">{menu}</a>
             </li>
           ))}

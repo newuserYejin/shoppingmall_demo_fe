@@ -12,20 +12,21 @@ const ProductAll = () => {
   // 처음 로딩하면 상품리스트 불러오기
 
   const { productList } = useSelector(state => state.product)
-  console.log("productList:", productList)
+  console.log("product ALL productList:", productList)
 
   const [query] = useSearchParams();
   const searchQuery = query.get("name") || ""
+  const categoryQurery = query.get('category') || ""
 
   useEffect(() => {
-    dispatch(productActions.getProductList({ name: searchQuery }))
+    dispatch(productActions.getProductList({ name: searchQuery, category: categoryQurery }))
     console.log("query:", searchQuery.name)
     console.log("search result:", productList)
-  }, [searchQuery])
+  }, [searchQuery, categoryQurery])
 
   return (
     <Container>
-      <Row>
+      <Row className="product_all_row">
         {productList && productList.length > 0 ? (productList.map((item, index) => (
           <Col md={3} sm={12}>
             <ProductCard item={item} />

@@ -9,15 +9,22 @@ const ProductCard = ({ item }) => {
     navigate(`/product/${id}`)
   };
 
+  const isSoldOut = Object.values(item.stock).every(stock => stock === 0)
+
   return (
     <div className="card" onClick={() => showProduct(item._id)}>
       <img
         src={item.image}
         alt=""
       />
+      {isSoldOut ? (
+        <div className="sold_out">
+          <div>Sold Out</div>
+        </div>
+      ) : ""}
       <div>{item.name}</div>
       <div>₩ {item.price}</div>
-    </div>
+    </div >
   );
 };
 

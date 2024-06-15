@@ -25,12 +25,18 @@ body {
   display: flex;
   list-style-type: none;
   padding: 20px;
+  font-size: 20px;
 }
 
 .menu li a {
   text-decoration: none;
   color: black;
   margin-left: 20px;
+}
+
+.menu li a:hover {
+  text-decoration: underline;
+  color: #C81E2B;
 }
 
 .nav-logo {
@@ -106,13 +112,36 @@ body {
   padding-right: 30px;
 }
 
+.product_all_row {
+  row-gap: 15px;
+}
+
 .card {
   border: none !important;
   margin-bottom: 10px;
+  position: relative;
 
   img {
     min-height: 330px;
     max-height: 330px;
+  }
+
+  .sold_out {
+    position: absolute;
+    min-height: 330px;
+    max-height: 330px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: rgba(73, 80, 87, 0.7);
+
+    div {
+      color: white;
+      font-size: 50px;
+      transform: rotate(20deg);
+    }
   }
 }
 
@@ -202,6 +231,7 @@ body {
 .side-menu-list button:hover {
   background-color: beige;
   border-radius: 3px;
+  color: blue;
 }
 
 
@@ -224,9 +254,6 @@ body {
   font-weight: bold;
   padding: 20px 10px;
   list-style-type: none;
-
-
-
 }
 
 .sidebar-item:hover {
