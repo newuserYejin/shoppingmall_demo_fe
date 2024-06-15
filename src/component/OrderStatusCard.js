@@ -4,20 +4,20 @@ import { badgeBg } from "../constants/order.constants";
 import { currencyFormat } from "../utils/number";
 
 const OrderStatusCard = ({ order }) => {
-  console.log("order List order", order)
   return (
     <div>
       <Row className="status-card">
-        <Col xs={2}>
+        <Col xs={3}>
           <img
             src={order.items[0].productId.image}
             alt=""
             height={96}
+            width={90}
           />
         </Col>
         <Col xs={8} className="order-info">
           <div>
-            <strong>주문번호: {order.orderNum}</strong>
+            <strong>OrderNum: {order.orderNum}</strong>
           </div>
 
           <div className="text-12">{new Date(order.createdAt).toLocaleDateString('ko-KR')}</div>
@@ -33,7 +33,7 @@ const OrderStatusCard = ({ order }) => {
           <div>₩ {currencyFormat(order.totalPrice)}</div>
         </Col>
         <Col md={2} className="vertical-middle">
-          <div className="text-align-center text-12">주문상태</div>
+          <div className="text-align-center text-12">Order Status</div>
           <Badge bg={badgeBg[order.status]}>{order.status}</Badge>
         </Col>
       </Row>

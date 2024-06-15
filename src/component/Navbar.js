@@ -42,7 +42,8 @@ const Navbar = ({ user }) => {
   };
 
   const selectCategory = (category) => {
-    navigate(`?category=${category}`);
+    navigate(`/?category=${category}`);
+    setWidth(0)
   };
 
 

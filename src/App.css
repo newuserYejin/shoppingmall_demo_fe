@@ -42,7 +42,7 @@ body {
 .nav-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .nav-menu-area {
@@ -84,6 +84,8 @@ body {
   position: relative;
   top: 10px;
   left: 10px;
+
+  border: solid 1px red;
 }
 
 .search {
@@ -134,7 +136,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2;
+    z-index: 1;
     background-color: rgba(73, 80, 87, 0.7);
 
     div {
@@ -176,6 +178,7 @@ body {
 .add-button {
   margin-top: 20px;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .card:hover {
@@ -192,7 +195,6 @@ body {
   height: 100%;
   width: 250px;
   position: fixed;
-  z-index: 1;
   top: 0;
   left: 0;
   background-color: burlywood;
@@ -231,7 +233,7 @@ body {
 .side-menu-list button:hover {
   background-color: beige;
   border-radius: 3px;
-  color: blue;
+  color: #C81E2B;
 }
 
 
@@ -277,6 +279,11 @@ body {
 .mobile-sidebar-toggle {
   display: none;
 }
+
+/*개인 작성*/
+/* .statusPages {
+  display: flex;
+} */
 
 
 @media screen and (max-width: 63rem) {
